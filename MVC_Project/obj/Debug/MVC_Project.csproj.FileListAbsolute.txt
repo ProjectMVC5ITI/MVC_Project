@@ -118,3 +118,7 @@ D:\ITI\MVC\project\MVC_Project\MVC_Project\bin\Newtonsoft.Json.xml
 D:\ITI\MVC\project\MVC_Project\MVC_Project\obj\Debug\MVC_Project.csprojResolveAssemblyReference.cache
 D:\ITI\MVC\project\MVC_Project\MVC_Project\obj\Debug\MVC_Project.dll
 D:\ITI\MVC\project\MVC_Project\MVC_Project\obj\Debug\MVC_Project.pdb
+D:\ITI\MVC\project\MVC_Project\MVC_Project\bin\EntityFramework.dll
+D:\ITI\MVC\project\MVC_Project\MVC_Project\bin\EntityFramework.SqlServer.dll
+D:\ITI\MVC\project\MVC_Project\MVC_Project\bin\EntityFramework.xml
+D:\ITI\MVC\project\MVC_Project\MVC_Project\bin\EntityFramework.SqlServer.xml
