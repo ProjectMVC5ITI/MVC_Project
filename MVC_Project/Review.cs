@@ -17,8 +17,8 @@ namespace MVC_Project
         public int Review_Id { get; set; }
         public int Review_Rating { get; set; }
         public string Review_Text { get; set; }
-        public int Customer_Id { get; set; }
         public System.DateTime Review_Date { get; set; }
+        public int Customer_Id { get; set; }
     
         public virtual Customer Customer { get; set; }
     }

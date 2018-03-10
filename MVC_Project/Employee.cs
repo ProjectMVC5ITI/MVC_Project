@@ -14,10 +14,11 @@ namespace MVC_Project
     
     public partial class Employee
     {
+        public int Emp_Id { get; set; }
         public int User_Id { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
-        public string JobTitle { get; set; }
-        public System.DateTime Hire_Date { get; set; }
+    
+        public virtual User User { get; set; }
     }
 }

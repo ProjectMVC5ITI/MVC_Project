@@ -7,9 +7,11 @@ using System.Web.Mvc;
 
 namespace MVC_Project.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private Entities db = new Entities();
+        [AllowAnonymous]
         public ActionResult Index()
         {
             List<ProductVM> prodList = new List<ProductVM>();
@@ -31,6 +33,16 @@ namespace MVC_Project.Controllers
                 prodList.Add(prod);
             }
             return View(prodList);
+        }
+        [AllowAnonymous]
+        public ActionResult NavAnonymousUser()
+        {
+            return PartialView();
+        }
+
+        public ActionResult NavAuthorizedUser()
+        {
+            return PartialView();
         }
 
         public ActionResult About()

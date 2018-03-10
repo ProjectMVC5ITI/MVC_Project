@@ -25,22 +25,16 @@
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Employee">
     <Key>
-      <PropertyRef Name="User_Id" />
-      <PropertyRef Name="Name" />
-      <PropertyRef Name="Phone" />
-      <PropertyRef Name="JobTitle" />
-      <PropertyRef Name="Hire_Date" />
+      <PropertyRef Name="Emp_Id" />
     </Key>
+    <Property Name="Emp_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="User_Id" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Phone" Type="nvarchar" MaxLength="15" Nullable="false" />
-    <Property Name="JobTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Hire_Date" Type="date" Nullable="false" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
@@ -104,13 +98,23 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
     <Property Name="Review_Date" Type="date" Nullable="false" />
     <Property Name="Customer_Id" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="U_Id" />
     </Key>
     <Property Name="U_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="User_Name" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="Password" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="User_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Emial" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <Association Name="FK_Cart_Customer">
@@ -134,6 +138,30 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
       </Principal>
       <Dependent Role="Cart">
         <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="U_Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="U_Id" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="User_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -225,22 +253,15 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
     <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="order_details" EntityType="Self.order_details" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductSpetial" EntityType="Self.ProductSpetial" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Employee" EntityType="Self.Employee" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Employee].[User_Id] AS [User_Id], 
-    [Employee].[Name] AS [Name], 
-    [Employee].[Phone] AS [Phone], 
-    [Employee].[JobTitle] AS [JobTitle], 
-    [Employee].[Hire_Date] AS [Hire_Date]
-    FROM [dbo].[Employee] AS [Employee]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_Cart_Customer" Association="Self.FK_Cart_Customer">
       <End Role="Customer" EntitySet="Customer" />
       <End Role="Cart" EntitySet="Cart" />
@@ -248,6 +269,14 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
     <AssociationSet Name="FK_Cart_Product" Association="Self.FK_Cart_Product">
       <End Role="Product" EntitySet="Product" />
       <End Role="Cart" EntitySet="Cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_User" Association="Self.FK_Customer_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_User" Association="Self.FK_Employee_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Employee" EntitySet="Employee" />
     </AssociationSet>
     <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
       <End Role="Customer" EntitySet="Customer" />

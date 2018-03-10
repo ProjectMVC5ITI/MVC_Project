@@ -11,12 +11,35 @@ namespace MVC_Project
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
+
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Customers = new HashSet<Customer>();
+            this.Employees = new HashSet<Employee>();
+        }
+    
         public int U_Id { get; set; }
+        [Required]
+        [Display(Name = "Name")]
         public string User_Name { get; set; }
-        public string Password { get; set; }
+        [Required]
+        [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress)]
+        [Remote("checkMail", "Account", ErrorMessage = "already Exist")]
         public string Emial { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+       
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Customer> Customers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }
