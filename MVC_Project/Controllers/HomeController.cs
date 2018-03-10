@@ -8,6 +8,7 @@ namespace MVC_Project.Controllers
 {
     public class HomeController : Controller
     {
+        private Entities db = new Entities();
         public ActionResult Index()
         {
             return View();

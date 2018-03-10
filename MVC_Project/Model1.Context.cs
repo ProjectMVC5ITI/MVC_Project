@@ -34,9 +34,7 @@ namespace MVC_Project
         public virtual DbSet<ProductImage> ProductImages { get; set; }
         public virtual DbSet<ProductSpetial> ProductSpetials { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Product_Image> Product_Image { get; set; }
     }
 }

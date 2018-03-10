@@ -21,7 +21,6 @@ namespace MVC_Project
             this.order_details = new HashSet<order_details>();
             this.ProductImages = new HashSet<ProductImage>();
             this.ProductSpetials = new HashSet<ProductSpetial>();
-            this.Product_Image = new HashSet<Product_Image>();
         }
     
         public int Product_Id { get; set; }
@@ -41,7 +40,5 @@ namespace MVC_Project
         public virtual ICollection<ProductImage> ProductImages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductSpetial> ProductSpetials { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product_Image> Product_Image { get; set; }
     }
 }

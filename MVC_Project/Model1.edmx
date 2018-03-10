@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="Cart_Id" />
@@ -80,14 +80,6 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
           <Property Name="Brand" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Cat_Id" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Product_Image">
-          <Key>
-            <PropertyRef Name="Img_Id" />
-          </Key>
-          <Property Name="Img_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Product_Id" Type="int" Nullable="false" />
-          <Property Name="Img_Path" Type="nvarchar" MaxLength="250" Nullable="false" />
-        </EntityType>
         <EntityType Name="ProductImage">
           <Key>
             <PropertyRef Name="Prod_Img_Id" />
@@ -114,16 +106,6 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
           <Property Name="Review_Rating" Type="int" Nullable="false" />
           <Property Name="Review_Text" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="Customer_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -206,18 +188,6 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_Image_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="Product_Image" Type="Self.Product_Image" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Product_Id" />
-            </Principal>
-            <Dependent Role="Product_Image">
-              <PropertyRef Name="Product_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ProductImage_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
@@ -261,11 +231,9 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="order_details" EntityType="Self.order_details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Product_Image" EntityType="Self.Product_Image" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductSpetial" EntityType="Self.ProductSpetial" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -300,10 +268,6 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
             <End Role="Category" EntitySet="Category" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_Image_Product" Association="Self.FK_Product_Image_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Product_Image" EntitySet="Product_Image" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProductImage_Product" Association="Self.FK_ProductImage_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductImage" EntitySet="ProductImage" />
@@ -317,7 +281,8 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
             <End Role="Reviews" EntitySet="Reviews" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -394,7 +359,6 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
           <NavigationProperty Name="order_details" Relationship="Self.FK_order_details_Product" FromRole="Product" ToRole="order_details" />
           <NavigationProperty Name="ProductImages" Relationship="Self.FK_ProductImage_Product" FromRole="Product" ToRole="ProductImage" />
           <NavigationProperty Name="ProductSpetials" Relationship="Self.FK_ProductSpetial_Product" FromRole="Product" ToRole="ProductSpetial" />
-          <NavigationProperty Name="Product_Image" Relationship="Model.FK_Product_Image_Product" FromRole="Product" ToRole="Product_Image" />
         </EntityType>
         <EntityType Name="ProductImage">
           <Key>
@@ -425,16 +389,6 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
           <Property Name="Review_Text" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Customer_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_Reviews_Customer" FromRole="Reviews" ToRole="Customer" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -577,7 +531,6 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
           <EntitySet Name="ProductImages" EntityType="Self.ProductImage" />
           <EntitySet Name="ProductSpetials" EntityType="Self.ProductSpetial" />
           <EntitySet Name="Reviews" EntityType="Self.Review" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
           <AssociationSet Name="FK_Cart_Customer" Association="Self.FK_Cart_Customer">
@@ -616,33 +569,7 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
             <End Role="Product" EntitySet="Products" />
             <End Role="ProductSpetial" EntitySet="ProductSpetials" />
           </AssociationSet>
-          <EntitySet Name="Product_Image" EntityType="Model.Product_Image" />
-          <AssociationSet Name="FK_Product_Image_Product" Association="Model.FK_Product_Image_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="Product_Image" EntitySet="Product_Image" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Product_Image">
-          <Key>
-            <PropertyRef Name="Img_Id" />
-          </Key>
-          <Property Name="Img_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Product_Id" Type="Int32" Nullable="false" />
-          <Property Name="Img_Path" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Product" Relationship="Model.FK_Product_Image_Product" FromRole="Product_Image" ToRole="Product" />
-        </EntityType>
-        <Association Name="FK_Product_Image_Product">
-          <End Type="Model.Product" Role="Product" Multiplicity="1" />
-          <End Type="Model.Product_Image" Role="Product_Image" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Product_Id" />
-            </Principal>
-            <Dependent Role="Product_Image">
-              <PropertyRef Name="Product_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -744,17 +671,6 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="Model.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="Model.User">
               <MappingFragment StoreEntitySet="User">
@@ -773,15 +689,6 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
                 <ScalarProperty Name="Hire_Date" ColumnName="Hire_Date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Product_Image">
-            <EntityTypeMapping TypeName="Model.Product_Image">
-              <MappingFragment StoreEntitySet="Product_Image">
-                <ScalarProperty Name="Img_Path" ColumnName="Img_Path" />
-                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
-                <ScalarProperty Name="Img_Id" ColumnName="Img_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

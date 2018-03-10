@@ -73,7 +73,6 @@
     <NavigationProperty Name="order_details" Relationship="Self.FK_order_details_Product" FromRole="Product" ToRole="order_details" />
     <NavigationProperty Name="ProductImages" Relationship="Self.FK_ProductImage_Product" FromRole="Product" ToRole="ProductImage" />
     <NavigationProperty Name="ProductSpetials" Relationship="Self.FK_ProductSpetial_Product" FromRole="Product" ToRole="ProductSpetial" />
-    <NavigationProperty Name="Product_Image" Relationship="Model.FK_Product_Image_Product" FromRole="Product" ToRole="Product_Image" />
   </EntityType>
   <EntityType Name="ProductImage">
     <Key>
@@ -104,16 +103,6 @@
     <Property Name="Review_Text" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Customer_Id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Customer" Relationship="Self.FK_Reviews_Customer" FromRole="Reviews" ToRole="Customer" />
-  </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -256,7 +245,6 @@
     <EntitySet Name="ProductImages" EntityType="Self.ProductImage" />
     <EntitySet Name="ProductSpetials" EntityType="Self.ProductSpetial" />
     <EntitySet Name="Reviews" EntityType="Self.Review" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <EntitySet Name="Employees" EntityType="Self.Employee" />
     <AssociationSet Name="FK_Cart_Customer" Association="Self.FK_Cart_Customer">
@@ -295,31 +283,5 @@
       <End Role="Product" EntitySet="Products" />
       <End Role="ProductSpetial" EntitySet="ProductSpetials" />
     </AssociationSet>
-    <EntitySet Name="Product_Image" EntityType="Model.Product_Image" />
-    <AssociationSet Name="FK_Product_Image_Product" Association="Model.FK_Product_Image_Product">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="Product_Image" EntitySet="Product_Image" />
-    </AssociationSet>
   </EntityContainer>
-  <EntityType Name="Product_Image">
-    <Key>
-      <PropertyRef Name="Img_Id" />
-    </Key>
-    <Property Name="Img_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Product_Id" Type="Int32" Nullable="false" />
-    <Property Name="Img_Path" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Product" Relationship="Model.FK_Product_Image_Product" FromRole="Product_Image" ToRole="Product" />
-  </EntityType>
-  <Association Name="FK_Product_Image_Product">
-    <End Type="Model.Product" Role="Product" Multiplicity="1" />
-    <End Type="Model.Product_Image" Role="Product_Image" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="Product_Id" />
-      </Principal>
-      <Dependent Role="Product_Image">
-        <PropertyRef Name="Product_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

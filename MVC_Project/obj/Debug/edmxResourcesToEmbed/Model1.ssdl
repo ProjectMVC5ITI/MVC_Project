@@ -75,14 +75,6 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
     <Property Name="Brand" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Cat_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Product_Image">
-    <Key>
-      <PropertyRef Name="Img_Id" />
-    </Key>
-    <Property Name="Img_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Product_Id" Type="int" Nullable="false" />
-    <Property Name="Img_Path" Type="nvarchar" MaxLength="250" Nullable="false" />
-  </EntityType>
   <EntityType Name="ProductImage">
     <Key>
       <PropertyRef Name="Prod_Img_Id" />
@@ -109,16 +101,6 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
     <Property Name="Review_Rating" Type="int" Nullable="false" />
     <Property Name="Review_Text" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="Customer_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -201,18 +183,6 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Product_Image_Product">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
-    <End Role="Product_Image" Type="Self.Product_Image" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="Product_Id" />
-      </Principal>
-      <Dependent Role="Product_Image">
-        <PropertyRef Name="Product_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ProductImage_Product">
     <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
@@ -256,11 +226,9 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
     <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="order_details" EntityType="Self.order_details" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Product_Image" EntityType="Self.Product_Image" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductSpetial" EntityType="Self.ProductSpetial" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -294,10 +262,6 @@ warning 6002: The table/view 'MVC-ShopingOnline.dbo.Employee' does not have a pr
     <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
       <End Role="Category" EntitySet="Category" />
       <End Role="Product" EntitySet="Product" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Product_Image_Product" Association="Self.FK_Product_Image_Product">
-      <End Role="Product" EntitySet="Product" />
-      <End Role="Product_Image" EntitySet="Product_Image" />
     </AssociationSet>
     <AssociationSet Name="FK_ProductImage_Product" Association="Self.FK_ProductImage_Product">
       <End Role="Product" EntitySet="Product" />
