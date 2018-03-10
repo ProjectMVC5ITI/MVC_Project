@@ -64,7 +64,7 @@
     <Property Name="Product_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Quantity" Type="Int32" Nullable="false" />
     <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Cat_Id" Type="Int32" Nullable="false" />
@@ -80,7 +80,7 @@
     </Key>
     <Property Name="Prod_Img_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Product_Id" Type="Int32" Nullable="false" />
-    <Property Name="Img_Url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Img_Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Product" Relationship="Self.FK_ProductImage_Product" FromRole="ProductImage" ToRole="Product" />
   </EntityType>
   <EntityType Name="ProductSpetial">
@@ -93,6 +93,7 @@
     <Property Name="Start_Date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="End_Date" Type="DateTime" Nullable="false" Precision="0" />
     <NavigationProperty Name="Product" Relationship="Self.FK_ProductSpetial_Product" FromRole="ProductSpetial" ToRole="Product" />
+    <Property Name="ImaUrl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Review">
     <Key>
@@ -103,6 +104,7 @@
     <Property Name="Review_Text" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Customer_Id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Customer" Relationship="Self.FK_Reviews_Customer" FromRole="Reviews" ToRole="Customer" />
+    <Property Name="Review_Date" Type="DateTime" Nullable="false" Precision="0" />
   </EntityType>
   <EntityType Name="User">
     <Key>

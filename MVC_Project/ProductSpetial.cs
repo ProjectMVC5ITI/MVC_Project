@@ -19,6 +19,7 @@ namespace MVC_Project
         public decimal New_Price { get; set; }
         public System.DateTime Start_Date { get; set; }
         public System.DateTime End_Date { get; set; }
+        public string ImaUrl { get; set; }
     
         public virtual Product Product { get; set; }
     }

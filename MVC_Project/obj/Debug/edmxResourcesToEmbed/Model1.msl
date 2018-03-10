@@ -78,6 +78,7 @@
     <EntitySetMapping Name="ProductSpetials">
       <EntityTypeMapping TypeName="Model.ProductSpetial">
         <MappingFragment StoreEntitySet="ProductSpetial">
+          <ScalarProperty Name="ImaUrl" ColumnName="ImaUrl" />
           <ScalarProperty Name="Special_P_Id" ColumnName="Special_P_Id" />
           <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
           <ScalarProperty Name="New_Price" ColumnName="New_Price" />
@@ -89,6 +90,7 @@
     <EntitySetMapping Name="Reviews">
       <EntityTypeMapping TypeName="Model.Review">
         <MappingFragment StoreEntitySet="Reviews">
+          <ScalarProperty Name="Review_Date" ColumnName="Review_Date" />
           <ScalarProperty Name="Review_Id" ColumnName="Review_Id" />
           <ScalarProperty Name="Review_Rating" ColumnName="Review_Rating" />
           <ScalarProperty Name="Review_Text" ColumnName="Review_Text" />
