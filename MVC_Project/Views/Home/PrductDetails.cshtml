@@ -1,0 +1,73 @@
+﻿@model MVC_Project.Models.VM.ProductVM
+@{
+    ViewBag.Title = "PrductDetails";
+}
+
+<div class="container" style="margin-top:25px">
+    <div class="row" style="height:350px;">
+        @*<div class="col-md-1" style="height:inherit;background-color:;">
+            <div class="" style="height:20%; border:1px grey solid;margin-bottom:5%;"></div>
+            <div class="" style="height:20%; border:1px grey solid;margin-bottom:5%;"></div>
+        </div>*@
+
+        <div class="col-md-4" style="height:inherit;border:1px grey solid;">
+            <img src="@Model.ImgUrl" style="margin:0 auto" />
+
+        </div>
+
+        <div class="col-md-4" style="margin-top:auto;text-align:center;height:inherit;">
+            <table style="text-align:left;">
+                <tr>
+                    <td style="font-size:large;">Name :</td>
+                    <td style="color:blue;">@Html.DisplayFor(model => model.Name)</td>
+                </tr>
+                <tr>
+                    <td style="font-size:large;">Price :</td>
+                    <td style="color:blue;">@Html.DisplayFor(model => model.Price)</td>
+                </tr>
+                <tr>
+                    <td style="font-size:large;">Description :</td>
+                    <td style="color:blue;">@Html.DisplayFor(model => model.Description)</td>
+                </tr>
+                <tr>
+                    <td style="font-size:large;">Quantity :</td>
+                    <td style="color:blue;">@Html.DisplayFor(model => model.Quantity)</td>
+                </tr>
+                <tr>
+                    <td style="font-size:large;">Brand :</td>
+                    <td style="color:blue;">@Html.DisplayFor(model => model.Brand)</td>
+                </tr>
+               
+            </table>
+
+        </div>
+
+        <div class="col-md-4" style="border:1px grey solid;height:inherit;">
+            <div class="" style="height:20%;">
+                <h3 style="color:blue;">Buy Now</h3>
+            </div>
+            @using (Html.BeginForm("AddToCart", "Home", FormMethod.Post))
+            {
+              <input type="hidden" name="Product_ID" value="@Model.Product_Id" />
+                <div class="form-group">
+                    <text>Availability : <span>on the stock</span></text><br />
+                    <h3 style="color:blue; ">@Model.Price</h3><br />
+                    @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Add to Cart" class="btn btn-primary" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<hr />
+
+@*@Html.Action("SuggestedProduct", "Products", new { CatName = Model.Brand})*@

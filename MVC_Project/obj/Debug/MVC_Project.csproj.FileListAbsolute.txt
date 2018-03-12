@@ -219,7 +219,6 @@ C:\Users\Mohamed Ali\MVC_Project\MVC_Project\bin\System.Web.WebPages.Deployment.
 C:\Users\Mohamed Ali\MVC_Project\MVC_Project\bin\System.Web.WebPages.Razor.xml
 C:\Users\Mohamed Ali\MVC_Project\MVC_Project\bin\Antlr3.Runtime.pdb
 C:\Users\Mohamed Ali\MVC_Project\MVC_Project\bin\Newtonsoft.Json.xml
-C:\Users\Mohamed Ali\MVC_Project\MVC_Project\obj\Debug\MVC_Project.csprojResolveAssemblyReference.cache
 C:\Users\Mohamed Ali\MVC_Project\MVC_Project\obj\Debug\MVC_Project.dll
 C:\Users\Mohamed Ali\MVC_Project\MVC_Project\obj\Debug\MVC_Project.pdb
 C:\Users\Mohamed Ali\MVC_Project\MVC_Project\bin\Microsoft.Owin.dll
@@ -231,3 +230,8 @@ C:\Users\Mohamed Ali\MVC_Project\MVC_Project\bin\Microsoft.Owin.xml
 C:\Users\Mohamed Ali\MVC_Project\MVC_Project\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\Mohamed Ali\MVC_Project\MVC_Project\bin\Microsoft.Owin.Security.xml
 C:\Users\Mohamed Ali\MVC_Project\MVC_Project\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Mohamed Ali\MVC_Project\MVC_Project\bin\PagedList.dll
+C:\Users\Mohamed Ali\MVC_Project\MVC_Project\bin\PagedList.Mvc.dll
+C:\Users\Mohamed Ali\MVC_Project\MVC_Project\bin\PagedList.xml
+C:\Users\Mohamed Ali\MVC_Project\MVC_Project\bin\PagedList.Mvc.xml
+C:\Users\Mohamed Ali\MVC_Project\MVC_Project\obj\Debug\MVC_Project.csprojResolveAssemblyReference.cache

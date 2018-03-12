@@ -21,13 +21,12 @@ namespace MVC_Project
         }
     
         public int O_Id { get; set; }
-        public int Cust_Id { get; set; }
-        public int Cart_Id { get; set; }
+        public int User_Id { get; set; }
         public decimal Total_Price { get; set; }
         public System.DateTime Sales_Date { get; set; }
     
-        public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order_details> order_details { get; set; }
+        public virtual User User { get; set; }
     }
 }

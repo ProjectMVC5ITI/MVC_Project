@@ -47,7 +47,7 @@ namespace MVC_Project.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       
         public ActionResult Create([Bind(Include = "Prod_Img_Id,Product_Id,Img_Url")] ProductImage productImage)
         {
             if (ModelState.IsValid)
@@ -81,7 +81,7 @@ namespace MVC_Project.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       
         public ActionResult Edit([Bind(Include = "Prod_Img_Id,Product_Id,Img_Url")] ProductImage productImage)
         {
             if (ModelState.IsValid)
@@ -111,7 +111,7 @@ namespace MVC_Project.Controllers
 
         // POST: ProductImages/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        
         public ActionResult DeleteConfirmed(int id)
         {
             ProductImage productImage = db.ProductImages.Find(id);

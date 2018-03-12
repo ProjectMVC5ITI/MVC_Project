@@ -1,9 +1,16 @@
-﻿@model IEnumerable<MVC_Project.Models.VM.ProductVM>
+﻿@model PagedList.IPagedList<MVC_Project.Models.VM.ProductVM>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Home Page";
 }
-<h1>Products</h1>
-
+@using (Html.BeginForm())
+{
+    <p style="margin-top:20px">
+        Find by name: @Html.TextBox("SearchString")
+        <input class="btn" type="submit" value="Search" />
+    </p>
+}
 
 <div class="container">
     <div class="row">
@@ -74,10 +81,10 @@
                         </div>
                         <div class="separator clear-left">
                             <p class="btn-add">
-                                <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a>
+                                <i class="fa fa-shopping-cart"></i><br>@Html.ActionLink("Add to cart", "Add", "Cart", new { id = item.Product_Id }, null)
                             </p>
                             <p class="btn-details">
-                                <i class="fa fa-list"></i><a class="hidden-sm">@Html.ActionLink("More details", "PrductDetails", "Home", new { id = item.Product_Id }, null)</a>
+                                <i class="fa fa-list"></i><a class="hidden-sm">@Html.ActionLink("More details", "PrductDetails", "Home",item,null)</a>
                             </p>
                         </div>
                         <div class="clearfix">
@@ -89,3 +96,7 @@
 
     </div>
 </div>
+
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page,currentFilter = ViewBag.CurrentFilter }))

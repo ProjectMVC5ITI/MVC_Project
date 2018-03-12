@@ -5,10 +5,14 @@
     border-radius: 5px;
     background: #FFF;
 }
+.col-item .photo 
+{
+    height:253px;  
+}
 .col-item .photo img
 {
     margin: 0 auto;
-    width: 100%;
+    width: 100%; 
 }
 
 .col-item .info

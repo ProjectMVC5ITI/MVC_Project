@@ -1,0 +1,38 @@
+﻿@model List<MVC_Project.Models.VM.ProductCart>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Product Name</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tbody>
+
+                <tr>
+                    <td><img src="@item.ImgUrl" height="190px" width="165px" /></td>
+                    <td>@item.Product_Name</td>
+                    <td>@item.price</td>
+                    <td>
+                       @item.Quantity
+                    </td>
+
+                    <td>@item.Quantity*@item.price</td>
+                    <td><button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Remove","Cart",new { id=item.Prodcut_Id})'">remove</button></td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>
+
+
+

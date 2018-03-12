@@ -16,10 +16,10 @@ namespace MVC_Project
     {
         public int Cart_Id { get; set; }
         public int Product_Id { get; set; }
-        public int Cust_Id { get; set; }
+        public int User_Id { get; set; }
         public int Quantity { get; set; }
     
-        public virtual Customer Customer { get; set; }
         public virtual Product Product { get; set; }
+        public virtual User User { get; set; }
     }
 }

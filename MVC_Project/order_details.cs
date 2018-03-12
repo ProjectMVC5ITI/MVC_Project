@@ -17,7 +17,6 @@ namespace MVC_Project
         public int Details_Id { get; set; }
         public int O_Id { get; set; }
         public int p_id { get; set; }
-        public int Cart_Id { get; set; }
         public int Quantity { get; set; }
         public int Price { get; set; }
     

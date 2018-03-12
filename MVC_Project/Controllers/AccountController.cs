@@ -35,6 +35,7 @@ namespace MVC_Project.Controllers
                 {
                     var user = context.Users.Where(u => u.Emial == newuser.Email && u.Password == newuser.Password).Select(u => u).FirstOrDefault();
                     saveUser(user);
+                    Session["user"] = user;
                     return RedirectToAction("Index", "home");
                 }
 
@@ -66,14 +67,18 @@ namespace MVC_Project.Controllers
         }
         private void saveUser(User newuser)
         {
-            context.Users.Add(newuser);
-            context.SaveChanges();
-
+            bool found = context.Users.Any(u => u.Emial == newuser.Emial && u.Password == newuser.Password);
+            if (found == false)//name found
+            {
+                context.Users.Add(newuser);
+                context.SaveChanges();
+            }
 
             var identity = new ClaimsIdentity(
                 new List<Claim>() {
                         new Claim(ClaimTypes.Email, newuser.Emial),
-                        new Claim("Name", newuser.User_Name) },
+                        new Claim("Name", newuser.User_Name),
+                        new Claim(ClaimTypes.NameIdentifier, newuser.U_Id.ToString()),},
                 "ApplicationCookie");
 
 
@@ -99,7 +104,7 @@ namespace MVC_Project.Controllers
             var authManager = ctx.Authentication;
             //User Authorizate 
             authManager.SignOut("ApplicationCookie");
-            return RedirectToAction("DiplayPrducts", "Home");
+            return RedirectToAction("Index", "Home");
             //return View(new UserDB());
         }
     }

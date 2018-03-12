@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using MVC_Project
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -14,9 +15,23 @@
     }
     else
     {
+        if (Session["user"] != null)
+        {
+            var x = (User)Session["user"];
+            if (x.User_Name == "Moahmed_ali")
+            {
+                Html.RenderAction("NavAuthorizedUser", "Home");
 
-        Html.RenderAction("NavAuthorizedUser", "Home");
 
+            }else
+            {
+                Html.RenderAction("UserPView", "Home");
+            }
+        }
+        else
+        {
+            Html.RenderAction("UserPView", "Home",new { });
+        }
     }
     <div class="container body-content">
         @RenderBody()
