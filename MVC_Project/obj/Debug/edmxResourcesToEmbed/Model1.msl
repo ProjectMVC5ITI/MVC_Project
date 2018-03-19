@@ -20,27 +20,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Customers">
-      <EntityTypeMapping TypeName="Model.Customer">
-        <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="Cust_Id" ColumnName="Cust_Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Employees">
-      <EntityTypeMapping TypeName="Model.Employee">
-        <MappingFragment StoreEntitySet="Employee">
-          <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
-          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="Model.Order">
         <MappingFragment StoreEntitySet="Order">
@@ -99,11 +78,11 @@
     <EntitySetMapping Name="Reviews">
       <EntityTypeMapping TypeName="Model.Review">
         <MappingFragment StoreEntitySet="Reviews">
-          <ScalarProperty Name="Review_Id" ColumnName="Review_Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Review_Rating" ColumnName="Review_Rating" />
           <ScalarProperty Name="Review_Text" ColumnName="Review_Text" />
           <ScalarProperty Name="Review_Date" ColumnName="Review_Date" />
-          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

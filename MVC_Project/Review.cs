@@ -14,12 +14,12 @@ namespace MVC_Project
     
     public partial class Review
     {
-        public int Review_Id { get; set; }
+        public int Id { get; set; }
         public int Review_Rating { get; set; }
         public string Review_Text { get; set; }
         public System.DateTime Review_Date { get; set; }
-        public int Customer_Id { get; set; }
+        public int User_Id { get; set; }
     
-        public virtual Customer Customer { get; set; }
+        public virtual User User { get; set; }
     }
 }

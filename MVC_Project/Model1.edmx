@@ -22,25 +22,6 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="Cust_Id" />
-          </Key>
-          <Property Name="Cust_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="User_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="Emp_Id" />
-          </Key>
-          <Property Name="Emp_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="User_Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Phone" Type="nvarchar" MaxLength="15" Nullable="false" />
-        </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="O_Id" />
@@ -93,13 +74,13 @@
         </EntityType>
         <EntityType Name="Reviews">
           <Key>
-            <PropertyRef Name="Review_Id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Review_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Review_Rating" Type="int" Nullable="false" />
           <Property Name="Review_Text" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="Review_Date" Type="date" Nullable="false" />
-          <Property Name="Customer_Id" Type="int" Nullable="false" />
+          <Property Name="User_Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -130,30 +111,6 @@
               <PropertyRef Name="U_Id" />
             </Principal>
             <Dependent Role="Cart">
-              <PropertyRef Name="User_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Customer_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="U_Id" />
-            </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="User_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Employee_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="U_Id" />
-            </Principal>
-            <Dependent Role="Employee">
               <PropertyRef Name="User_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -231,22 +188,20 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Reviews_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="Cust_Id" />
+            <Principal Role="User">
+              <PropertyRef Name="U_Id" />
             </Principal>
             <Dependent Role="Reviews">
-              <PropertyRef Name="Customer_Id" />
+              <PropertyRef Name="User_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="order_details" EntityType="Self.order_details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
@@ -261,14 +216,6 @@
           <AssociationSet Name="FK_Cart_User" Association="Self.FK_Cart_User">
             <End Role="User" EntitySet="User" />
             <End Role="Cart" EntitySet="Cart" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Customer_User" Association="Self.FK_Customer_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Customer" EntitySet="Customer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Employee_User" Association="Self.FK_Employee_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Employee" EntitySet="Employee" />
           </AssociationSet>
           <AssociationSet Name="FK_order_details_Order" Association="Self.FK_order_details_Order">
             <End Role="Order" EntitySet="Order" />
@@ -295,7 +242,7 @@
             <End Role="ProductSpetial" EntitySet="ProductSpetial" />
           </AssociationSet>
           <AssociationSet Name="FK_Reviews_Customer" Association="Self.FK_Reviews_Customer">
-            <End Role="Customer" EntitySet="Customer" />
+            <End Role="User" EntitySet="User" />
             <End Role="Reviews" EntitySet="Reviews" />
           </AssociationSet>
         </EntityContainer>
@@ -323,28 +270,6 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Product_Category" FromRole="Category" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="Cust_Id" />
-          </Key>
-          <Property Name="Cust_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="User_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Customer_User" FromRole="Customer" ToRole="User" />
-          <NavigationProperty Name="Reviews" Relationship="Self.FK_Reviews_Customer" FromRole="Customer" ToRole="Reviews" />
-        </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="Emp_Id" />
-          </Key>
-          <Property Name="Emp_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="User_Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Employee_User" FromRole="Employee" ToRole="User" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -409,14 +334,14 @@
         </EntityType>
         <EntityType Name="Review">
           <Key>
-            <PropertyRef Name="Review_Id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Review_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Review_Rating" Type="Int32" Nullable="false" />
           <Property Name="Review_Text" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Review_Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Customer_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Reviews_Customer" FromRole="Reviews" ToRole="Customer" />
+          <Property Name="User_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Reviews_Customer" FromRole="Reviews" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -427,9 +352,8 @@
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Emial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_User" FromRole="User" ToRole="Cart" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_User" FromRole="User" ToRole="Customer" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_User" FromRole="User" ToRole="Employee" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Order_User" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK_Reviews_Customer" FromRole="User" ToRole="Reviews" />
         </EntityType>
         <Association Name="FK_Cart_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
@@ -464,42 +388,6 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="Cat_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Customer_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="U_Id" />
-            </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="User_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Reviews_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="Reviews" Type="Self.Review" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="Cust_Id" />
-            </Principal>
-            <Dependent Role="Reviews">
-              <PropertyRef Name="Customer_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Employee_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="U_Id" />
-            </Principal>
-            <Dependent Role="Employee">
-              <PropertyRef Name="User_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -563,11 +451,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Reviews_Customer">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Reviews" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="U_Id" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Carts" EntityType="Self.Cart" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
-          <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="order_details" EntityType="Self.order_details" />
           <EntitySet Name="Products" EntityType="Self.Product" />
@@ -586,18 +484,6 @@
           <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Customer_User" Association="Self.FK_Customer_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Customer" EntitySet="Customers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Reviews_Customer" Association="Self.FK_Reviews_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Reviews" EntitySet="Reviews" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Employee_User" Association="Self.FK_Employee_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Employee" EntitySet="Employees" />
           </AssociationSet>
           <AssociationSet Name="FK_order_details_Order" Association="Self.FK_order_details_Order">
             <End Role="Order" EntitySet="Orders" />
@@ -618,6 +504,10 @@
           <AssociationSet Name="FK_ProductSpetial_Product" Association="Self.FK_ProductSpetial_Product">
             <End Role="Product" EntitySet="Products" />
             <End Role="ProductSpetial" EntitySet="ProductSpetials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Customer" Association="Self.FK_Reviews_Customer">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Reviews" EntitySet="Reviews" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -642,27 +532,6 @@
                 <ScalarProperty Name="Cat_Id" ColumnName="Cat_Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="Model.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="Cust_Id" ColumnName="Cust_Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="Model.Employee">
-              <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
-                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -724,11 +593,11 @@
           <EntitySetMapping Name="Reviews">
             <EntityTypeMapping TypeName="Model.Review">
               <MappingFragment StoreEntitySet="Reviews">
-                <ScalarProperty Name="Review_Id" ColumnName="Review_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Review_Rating" ColumnName="Review_Rating" />
                 <ScalarProperty Name="Review_Text" ColumnName="Review_Text" />
                 <ScalarProperty Name="Review_Date" ColumnName="Review_Date" />
-                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

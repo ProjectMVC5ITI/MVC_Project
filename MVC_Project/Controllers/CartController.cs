@@ -34,12 +34,15 @@ namespace MVC_Project.Controllers
                 prod.Prodcut_Id = item.Product_Id;
                 prod.Product_Name = prods.Name;
                 prod.Quantity = item.Quantity;
+                prod.ItemTotalPrice = prods.Price * item.Quantity;
                 prod.price = prods.Price;
+
                 prodsCart.Add(prod);
             }
             return View(prodsCart);
         }
-        public ActionResult Add(int id)
+      
+        public void Add(int id)
         {
             User user = (User)Session["user"];
             var cart = (from c in db.Carts
@@ -58,7 +61,7 @@ namespace MVC_Project.Controllers
                 cart.Quantity++;
                 db.SaveChanges();
             }
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
         }
         public ActionResult AddFromDetails(int id,int quantity)
         {

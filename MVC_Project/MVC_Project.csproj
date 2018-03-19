@@ -181,15 +181,10 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OderController.cs" />
     <Compile Include="Controllers\ProductCatController.cs" />
     <Compile Include="Controllers\ProductImagesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Customer.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Employee.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -318,6 +313,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Oder\" />
     <Folder Include="Views\UserProduct\" />
   </ItemGroup>
   <ItemGroup>
