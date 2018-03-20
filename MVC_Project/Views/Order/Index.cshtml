@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MVC_Project.Order>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Total_Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sales_Date)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total_Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sales_Date)
+        </td>
+        
+        <td>
+            
+            @Html.ActionLink("Details", "Details", new { id=item.O_Id })
+            
+        </td>
+    </tr>
+}
+
+</table>

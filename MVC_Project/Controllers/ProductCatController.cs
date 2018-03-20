@@ -10,7 +10,7 @@ namespace MVC_Project.Controllers
 {
     public class ProductCatController : Controller
     {
-        Entities db = new Entities();
+        Entities1 db = new Entities1();
         // GET: ProductCat
         public ActionResult MobileAndTabs(string searchString, string currentFilter, int? page)
         {

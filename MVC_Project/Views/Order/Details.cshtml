@@ -25,29 +25,14 @@
                     <td>@item.Product_Name</td>
                     <td>@item.price</td>
                     <td>
-                       @item.Quantity
+                        @item.Quantity
                     </td>
 
                     <td>@item.ItemTotalPrice</td>
-                    <td><button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Remove", "Cart", new { id = item.Prodcut_Id })'">remove</button></td>
                 </tr>
             </tbody>
         }
     </table>
-    <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-3"></div>
-        <div class="col-sm-3"></div>
-        <div class="col-sm-3">
-          @if (Model.Count > 0)
-          {
-            @Html.ActionLink("Buy", "Add", "Order", Model, new { @class = "btn btn-primary" })
-             <span>Total Price :@totalPrice</span> 
-          }
-        </div>
     
-    </div>
 </div>
-
-
 

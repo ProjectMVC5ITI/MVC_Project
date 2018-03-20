@@ -10,7 +10,7 @@ namespace MVC_Project.Controllers
      
     public class CartController : Controller
     {
-        Entities db = new Entities();
+        Entities1 db = new Entities1();
         // GET: Cart
         public ActionResult Index()
         {

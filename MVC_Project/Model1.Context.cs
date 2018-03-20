@@ -13,10 +13,10 @@ namespace MVC_Project
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class Entities1 : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public Entities1()
+            : base("name=Entities1")
         {
         }
     
@@ -33,6 +33,7 @@ namespace MVC_Project
         public virtual DbSet<ProductImage> ProductImages { get; set; }
         public virtual DbSet<ProductSpetial> ProductSpetials { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }

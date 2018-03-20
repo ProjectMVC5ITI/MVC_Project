@@ -11,7 +11,7 @@ namespace MVC_Project.Controllers
      [AllowAnonymous]
     public class AccountController : Controller
     {
-        Entities context = new Entities();
+        Entities1 context = new Entities1();
         // GET: Account
         public ActionResult login()
         {

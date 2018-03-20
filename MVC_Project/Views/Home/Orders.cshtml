@@ -1,0 +1,29 @@
+﻿@model List<MVC_Project.Models.VM.OrderVM>
+@{
+    ViewBag.Title = "Orders";
+}
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>User Name</th>
+                <th>Total Price</th>
+                <th>Oder Date</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tbody>
+
+                <tr>
+                    <td>@item.Username</td>
+                    <td>@item.TotalPrice</td>
+                    <td>@item.OrderDate</td>
+                    <td><button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Details", "Order", new { id = item.OrderID })'">Details</button></td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>

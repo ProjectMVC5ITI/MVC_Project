@@ -12,7 +12,7 @@ namespace MVC_Project.Controllers
 {
     public class ProductsController : Controller
     {
-        private Entities db = new Entities();
+        private Entities1 db = new Entities1();
 
         // GET: Products
         public ActionResult Index()

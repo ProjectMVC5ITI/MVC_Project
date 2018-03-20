@@ -11,7 +11,7 @@ namespace MVC_Project.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private Entities db = new Entities();
+        private Entities1 db = new Entities1();
         [AllowAnonymous]
         public ActionResult Index(string searchString,string currentFilter, int? page)
         {
@@ -91,5 +91,27 @@ namespace MVC_Project.Controllers
 
             return View();
         }
+
+
+
+        public ActionResult Orders()
+        {
+            var orders = from o in db.Orders
+                         select new { o.O_Id, o.User.User_Name, o.Total_Price, o.Sales_Date };
+
+            List<OrderVM> orderList = new List<OrderVM>();
+            foreach (var item in orders)
+            {
+                OrderVM order = new OrderVM();
+                order.OrderID = item.O_Id;
+                order.Username = item.User_Name;
+                order.OrderDate = item.Sales_Date;
+                order.TotalPrice = item.Total_Price;
+                orderList.Add(order);
+            }
+            return View(orderList);
+        }
+
+
     }
 }
